@@ -5,7 +5,10 @@ let redisClient = null;
 
 const connectRedis = () => {
   try {
-    redisClient = new Redis(process.env.REDIS_URL || 'redis://localhost:6379', {
+
+    console.log("REDIS_URL:", process.env.REDIS_URL);   // add here
+
+    redisClient = new Redis(process.env.REDIS_URL, {
       retryStrategy: (times) => {
         const delay = Math.min(times * 50, 2000);
         return delay;
@@ -13,6 +16,7 @@ const connectRedis = () => {
       maxRetriesPerRequest: 3,
     });
 
+    redisClient.on('connect', () => logger.info('Redis connected'));
     redisClient.on('connect', () => logger.info('Redis connected'));
     redisClient.on('error', (err) => logger.error(`Redis error: ${err}`));
     redisClient.on('reconnecting', () => logger.warn('Redis reconnecting...'));
