@@ -45,7 +45,7 @@ app.use(xss());
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://gym-frontend.onrender.com"
+    "https://gym-frontend-0u3q.onrender.com"
   ],
   credentials: true
 }));
