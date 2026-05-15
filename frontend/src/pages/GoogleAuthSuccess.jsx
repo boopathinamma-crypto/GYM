@@ -52,7 +52,7 @@ export default function GoogleAuthSuccess() {
             try {
                 // Store access token
                 setToken(token);
-                localStorage.setItem('accessToken', token);
+                sessionStorage.setItem('accessToken', token);
 
                 // Fetch full user profile using the new token
                 const { data } = await authService.getMe();
@@ -127,4 +127,18 @@ export default function GoogleAuthSuccess() {
             )}
         </div>
     );
+    return (
+  <div
+    style={{
+      minHeight: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      background: '#111',
+      color: 'white'
+    }}
+  >
+    {status}
+  </div>
+);
 }
